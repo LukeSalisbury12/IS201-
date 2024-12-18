@@ -3,101 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baseball Enthusiast</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <title>Baseball Trivia App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <header class="bg-primary text-white text-center py-4">
-        <h1>Welcome to My Baseball Passion Page</h1>
-        <p>Exploring the history, art, and excitement of the game</p>
+<body>
+    <header>
+        <h1>Baseball Trivia Game</h1>
+        <p>Test your baseball knowledge!</p>
     </header>
+    <main>
+        <h2>Question:</h2>
+        <div id="question" class="question"></div>
+        <div id="answers"></div>
+        <button onclick="nextQuestion()">Next Question</button>
+        <div id="result"></div>
+    </main>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Baseball</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About Baseball</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#gallery">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#video">Video</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#stats">Statistics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#app">Web App</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <script>
+        const triviaQuestions = [
+            {
+                question: "Who holds the MLB record for the most career home runs?",
+                answers: ["Babe Ruth", "Hank Aaron", "Barry Bonds", "Alex Rodriguez"],
+                correct: "Barry Bonds"
+            },
+            {
+                question: "Which team has won the most World Series titles?",
+                answers: ["New York Yankees", "Boston Red Sox", "Chicago Cubs", "St. Louis Cardinals"],
+                correct: "New York Yankees"
+            },
+            {
+                question: "What is the distance between the bases on a standard baseball field?",
+                answers: ["60 feet", "90 feet", "100 feet", "80 feet"],
+                correct: "90 feet"
+            },
+            {
+                question: "Who was the first African American to play in Major League Baseball?",
+                answers: ["Jackie Robinson", "Satchel Paige", "Willie Mays", "Hank Aaron"],
+                correct: "Jackie Robinson"
+            },
+            {
+                question: "In which year did the Chicago Cubs break their 108-year World Series drought?",
+                answers: ["2015", "2016", "2017", "2018"],
+                correct: "2016"
+            }
+        ];
 
-    <section id="about" class="container py-5">
-        <h2 class="text-center">Why I Love Baseball</h2>
-        <p>Baseball is more than a game; it's a tradition, a way to connect with friends and family, and a test of skill and strategy. From the crack of the bat to the roar of the crowd, every moment is filled with excitement and anticipation.</p>
-        <div>
-            <h3>History</h3>
-            <ul>
-                <li>Origins in the 19th century</li>
-                <li>Famous players: Babe Ruth, Jackie Robinson, Hank Aaron</li>
-                <li>Iconic stadiums: Fenway Park, Wrigley Field</li>
-            </ul>
-            <h3>My Favorites</h3>
-            <ol>
-                <li>Favorite Team: New York Yankees</li>
-                <li>Favorite Player: Derek Jeter</li>
-                <li>Favorite Memory: Attending my first live game</li>
-            </ol>
-        </div>
-    </section>
+        let currentQuestionIndex = 0;
 
-    <section id="gallery" class="container py-5">
-        <h2 class="text-center">Gallery</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/300x200" alt="Baseball action" class="img-fluid">
-            </div>
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/300x200" alt="Historic stadium" class="img-fluid">
-            </div>
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/300x200" alt="Crowd cheering" class="img-fluid">
-            </div>
-        </div>
-    </section>
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const answersElement = document.getElementById("answers");
+            const resultElement = document.getElementById("result");
 
-    <section id="video" class="container py-5">
-        <h2 class="text-center">Featured Video</h2>
-        <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
-        </div>
-    </section>
+            // Reset result and answers
+            resultElement.textContent = "";
+            answersElement.innerHTML = "";
 
-    <section id="stats" class="container py-5">
-        <h2 class="text-center">Interactive Baseball Stats</h2>
-        <div>
-            <iframe src="https://public.tableau.com/views/SampleViz/BaseballStats" width="100%" height="500" frameborder="0"></iframe>
-        </div>
-    </section>
+            // Display question
+            const currentQuestion = triviaQuestions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
 
-    <section id="app" class="container py-5">
-        <h2 class="text-center">Web App</h2>
-        <p class="text-center"><a href="baseball-app.html" target="_blank" class="btn btn-primary">Check out my Baseball Trivia App!</a></p>
-    </section>
+            // Display answers
+            currentQuestion.answers.forEach(answer => {
+                const button = document.createElement("button");
+                button.textContent = answer;
+                button.onclick = () => checkAnswer(answer);
+                answersElement.appendChild(button);
+            });
+        }
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Baseball Enthusiast | Designed with Bootstrap</p>
-    </footer>
+        function checkAnswer(selectedAnswer) {
+            const currentQuestion = triviaQuestions[currentQuestionIndex];
+            const resultElement = document.getElementById("result");
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            if (selectedAnswer === currentQuestion.correct) {
+                resultElement.textContent = "Correct! 🎉";
+                resultElement.style.color = "green";
+            } else {
+                resultElement.textContent = `Wrong! The correct answer was: ${currentQuestion.correct}`;
+                resultElement.style.color = "red";
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= triviaQuestions.length) {
+                currentQuestionIndex = 0; // Restart the game
+                alert("You've completed the trivia! Starting over.");
+            }
+            displayQuestion();
+        }
+
+        // Display the first question on page load
+        displayQuestion();
+    </script>
 </body>
 </html>
+
